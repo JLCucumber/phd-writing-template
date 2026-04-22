@@ -1,15 +1,18 @@
 OUTPUT = output
+ASSETS = assets
 
 pdf:
 	mkdir -p $(OUTPUT)
 	pandoc main.md \
 		--citeproc \
-		--bibliography=refs.bib \
-		--csl=ieee.csl \
+		--bibliography=$(ASSETS)/refs.bib \
+		--csl=$(ASSETS)/ieee.csl \
 		--standalone \
-		--css=style.css \
+		--css=$(ASSETS)/style.css \
 		--metadata link-citations=true \
 		-o $(OUTPUT)/proposal.html
+	sed -i 's/gap: min(4vw, 1.5em);/gap: 1.5em;/' $(OUTPUT)/proposal.html
+	sed -i 's/overflow-x: auto;/overflow: visible;/' $(OUTPUT)/proposal.html
 	weasyprint --base-url . $(OUTPUT)/proposal.html $(OUTPUT)/proposal.pdf
 
 
@@ -17,19 +20,19 @@ docx:
 	mkdir -p $(OUTPUT)
 	pandoc main.md \
 		--citeproc \
-		--bibliography=refs.bib \
-		--csl=ieee.csl \
+		--bibliography=$(ASSETS)/refs.bib \
+		--csl=$(ASSETS)/ieee.csl \
 		-o $(OUTPUT)/proposal.docx
 
 html:
 	mkdir -p $(OUTPUT)
 	pandoc main.md \
 		--citeproc \
-		--bibliography=refs.bib \
-		--csl=ieee.csl \
+		--bibliography=$(ASSETS)/refs.bib \
+		--csl=$(ASSETS)/ieee.csl \
 		--embed-resources \
 		--standalone \
-		--css=style.css \
+		--css=$(ASSETS)/style.css \
 		--metadata link-citations=true \
 		-o $(OUTPUT)/proposal.html
 

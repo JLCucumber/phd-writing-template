@@ -1,0 +1,15 @@
+{
+    "folders": [
+        { "path": "personal-statement" },
+        { "path": "research-proposal" },
+        { "path": "template" }
+    ],
+    "settings": {
+        "makefile.configureOnOpen": false,
+        "spellright.language": [],
+        "spellright.documentTypes": [
+            "latex",
+            "plaintext"
+        ]
+    }
+}

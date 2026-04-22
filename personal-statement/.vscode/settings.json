@@ -1,0 +1,11 @@
+{
+    "PandocCiter.RootFile": "main.md",
+    "PandocCiter.DefaultBibs": [
+        "assets/refs.bib"
+    ],
+    "spellright.language": [],
+    "spellright.documentTypes": [
+        "latex",
+        "plaintext"
+    ]
+}

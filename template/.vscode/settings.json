@@ -1,0 +1,4 @@
+{
+    "pandocCiter.rootFile": "main.md",
+    "pandocCiter.DefaultBibs": ["assets/refs.bib"]
+}
