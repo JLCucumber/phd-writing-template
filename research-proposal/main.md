@@ -30,13 +30,10 @@ The work is structured around three research objectives.
 - *RO2.2* Integrate IMP with WANS and validate in UK temperate woodland.
 - *RO2.3* Release IMP design and deployment protocols as open-source contributions
 
-**RO3: Systematize Field Deployment Experience into Community-Usable Knowledge and Open Artifacts**
-- *RO3.1* Synthesise a field-experience reference for legged-robot wild deployment, 
-  integrating own deployment lessons with prior work, and including a set of 
-  deployment-grounded evaluation metrics.
-- *RO3.2* Release open-source artifacts validated through this research: 
-  IMP design, portable WANS components, longitudinal deployment datasets, 
-  and benchmark tasks.
+**RO3: Contribute Community-Usable Knowledge, Artifacts, and Data from Wild Legged-Robot Deployment**
+- *RO3.1* Lesson-learned synthesis: integrate deployment experience with prior-work lessons into a structured reference (failure taxonomies, design decisions, operational protocols).
+- *RO3.2* Open-source artifacts: release IMP hardware design, portable WANS components, and deployment tooling.
+- *RO3.3* Deployment dataset (conditional on deployment scope and data quality): release a longitudinal UK woodland dataset covering sensor streams, robot telemetry, and monitoring payload readings, to support reproducible evaluation of wild navigation.
 
 # 2. Literature Review
 
@@ -60,7 +57,7 @@ Building on the literature above, this PhD is oriented around the question:
 
 > **How can long-term autonomous navigation of legged robots in wild environments be engineered to support integrated environmental-monitoring deployment on cost-controlled platforms?**
 
-The methodology is organised into three technical workstreams, each linked to one or more research objectives: (3.1) Wild Autonomous Navigation System (WANS) Development; (3.2) Integrated Monitor Payload Development; (3.3) Field Deployment, "社区贡献集合包"(lesson learned collection of field robot test (mine (practice) and others (survey)), (尝试给出) a bit more general-use evaluation matrics for WANS and IMP, and opensource ).
+The methodology is organised into three technical workstreams, each linked to one or more research objectives: (3.1) Wild Autonomous Navigation System (WANS) Development; (3.2) Integrated Monitoring Payload (IMP) Development; (3.3) Field Deployment, Lessons Synthesis, and Open Artifacts.
 
 ## 3.1 WANS Development
 
@@ -72,17 +69,20 @@ Hardware is selected to demonstrate that WANS capability can be built on cost-co
 - Robot platform: Unitree Go2 / Go2-W / B2 (pending) / A2 (pending)
 - Sensor Configuration: LiDAR (Livox Mid360 or equivalent) + 1~2 RGB-D Cameras (RealSense D435i or equivalent), GNSS.
 - Computation: Jetson Orin AGX / Intel NUC
-- Others: , Network Router, HDMI wireless graphic transmitter,  
+- Others: Network Router, HDMI wireless video transmitter,  
 
-Unitree Series is commonly indentified mid-tire platform for cost-controlled experiements; LiDAR, cameras and GNSS are fundamental sensors for perception, localization and mapping; Jetson and Intel provides external computation for running SLAM or Semantic Segmentation. Router and HDMI wireless graphic transmitter provides network access and remote control over edge computers.
+Unitree Series is commonly indentified mid-tire platform for cost-controlled experiements; LiDAR, cameras and GNSS are fundamental sensors for perception, localization and mapping; Jetson and Intel provides external computation for running SLAM or Semantic Segmentation. Router and HDMI wireless video transmitter provides network access and remote control over edge computers.
 
 
 ### 3.1.2 System Architecture
 
-The proposed WANS follows a modular architecture that combines multimodal perception, FAST-LIO2-based state estimation, foundation-model-based scene encoding, semantic segmentation, local map representation through elevation maps, local planning, and an RL-based locomotion policy. Rather than proposing a wholly new algorithmic stack, the emphasis is on integrating these existing components into a robust system for autonomous operation in wild environments.
+The proposed WANS follows a modular architecture that combines multimodal perception, state estimation, foundation-model-based scene encoding, semantic segmentation, local map representation through elevation maps, local planning, and an RL-based locomotion policy. Rather than proposing a wholly new algorithmic stack, the emphasis is on integrating these existing components into a robust system for autonomous operation in wild environments.
+
+Perception inputs (LiDAR, RGB camera, IMU) feed into two parallel streams: FAST-LIO2 provides state estimation and transforms, while VLM-guided open-vocabulary semantic segmentation produces scene understanding used for local map annotation. The local map (elevation map with semantic overlay) drives the local planner, which produces velocity commands executed by a learning-based or optimisation-based locomotion policy
 
 ![Figure 1: System architecture of the proposed WANS.](image-2.png){#fig:wans-arch width=100%}
 
+Evaluation of the integrated WANS is described in Section 3.3.1.
 
 ## 3.2 IMP Development
 
@@ -109,41 +109,43 @@ To ensure reproducibility, the IMP will be documented through open-source CAD fi
 
 ### 3.3.1 Real-World Deployment
 
-**Level 0: Simulation Validation (optional)** -- e.g. Gazebo or Unreal Robotics Lab [@embley-riches2026unrealroboticslab]. During the early stages of system development, modules can be debugged and integrated in a simulation environment.
-
 **Level 1: Urban Semi-structured outdoor** -- e.g. UCL East and urban grassland. This level establishes the baseline system in an outdoor setting, where terrain variation, vegetation clutter, and perception ambiguity are limited, allowing early failures to be analysed and attributed to system integration and basic autonomy issues.
 
 **Level 2: Wild Semi-structured outdoor** — e.g. open woodland or hill with relatively clear hiking paths. This level transits into genuinely wild environments, where canopy effects, irregular terrain, and natural visual clutter begin to challenge perception, localization and local planning. But path structure can still support progressive system debugging.
 
 **Level 3: Dense forest** — e.g. UK temperate broadleaf woodland with dense undergrowth. This level is the target deployment scenario for RO1, where path structure maybe absent, vegetation can confuse geometric perception, and challenges system robustness against complex field conditions.
  
-In system development phase, most experiments will be carried out in Level 0 and Level 1.
-Once the WANS and IMP are testeed pass seperately, we will integrate both and carry out test in Level 2 and Level 3. During the loaded field test, we might see the need to adjust and improve both both systems, so as to handle unpredicted challenges brought by the dense vegitations or unstructured terrains.   
+WANS and IMP are developed and tested independently during the early phase (Levels 1~2), then integrated and evaluated jointly under Level 3 conditions where dense undergrowth and unstructred terrain challenge both subsystems.  
 
-During the deployment, we will develop a structured log for the system performances (e.g. human intervention frequency, sustained deployment duration, validity of collected data on IMP), failures modes, and decisions on technical changes.  
+<!-- During the deployment, we will develop a structured log for the system performances (e.g. human intervention frequency, sustained deployment duration, validity of collected data on IMP), failures modes, and decisions on technical changes.   -->
 
-### 3.3.2 Structured Lessons Capture & Evaluation Framework
 
-**Contribution A: Field-Experience Synthesis**
+### 3.3.2 Lessons Capture, Artifact Release, and Dataset Contribution
+
+**(a) Lessons-learned synthesis** [describes RO3.1 work]
 
 A field-experience synthesis that integrates the deployment lessons from own and prior work into a structured community reference. This includes failure taxonomies, design-decision records, operational protocols, and a set of proposed evaluation metrics grounded in deployment practice. It is intended to accelerate subsequent field work in legged-robot wild deployments.
 
-**Contribution B: Open-Source Artifact Release**
-<!-- 社区贡献3 - 开源一些能够让大家复用的,好用的东西 -- 比如 IMP 的设计和 API, 比如如果经过验证有一定通用性的 WANS stack, 或者就是几个具体的模块. -->
-Open-source release of system artifacts validated through this research: (a) the Integrated Monitoring Payload design (CAD, BOM, firmware, ROS 2 interfaces), (b) WANS components demonstrated to be portable across the evaluated platforms, and (c) longitudinal deployment datasets from UK woodland campaigns, licensed permissively for academic and industrial reuse.
+**(b) Open-source artifacts** [describes RO3.2 work]  
+
+Open-source release of system artifacts validated through this research: (a) the Integrated Monitoring Payload design (CAD, BOM, firmware, ROS 2 interfaces) and (b) WANS components demonstrated to be portable across the evaluated platforms.
 
 
+**(c) Longitudinal deployment dataset** [describes RO3.3 work, with conditional framing]
 
+Conditioned by the quantity and quality of longitudinal deployment in UK woodland scenarios, data including LiDAR pointcloud, RGB-D image streams, IMU, GPS (where available), modular output in WANS (elevation map, semantic segmentation output, local planner), IMP sensor readings (gas, soil, temperature & humidity) and robot joint states will be recorded. It will be annotated with deployment outcomes and failure annotations.
 
+This dataset is intended to support reproducible evaluation of wild navigation algorithms in under-canopy, seasonal-variation contexts not well covered by existing datasets, which could serve as (1) SLAM/navigation benchmark for legged wild navigation (legged platform dynamics, dense undergrowth scenes, seasonal variation); (2) Traversability or semantic learning data (UK forest domain specific); (3) monitoring data from IMP for environmental analysis; (4) Failure mode documentation. 
+
+Both lessons-learned capture and dataset preparation require disciplined data and metadata collection from the first deployment onward; these practices are established in Year 1 as part of the deployment protocol
 
 
 # 4. Expected Contributions
 
-1. **A prototype long-term autonomous wild-navigation system on a cost-controlled quadruped platform** (RO1.1) — deployable, instrumented, and usable by a single field operator.
-2. **Empirical evidence of cross-scenario generalisation and long-duration stability** (RO1.2), established through structured field deployments across a scenario-diversity matrix.
-3. **A field-grounded experiential synthesis of long-duration wild deployment** (RO1.3) — a systems-level lessons-learned account with an associated open dataset, intended as a practical reference for subsequent work.
-4. **An updated design-space framework for autonomous environmental monitoring systems** (RO2.1), spanning target ecosystems, monitoring targets, platform classes, and hardware-integration constraints, developed in consultation with ecology stakeholders.
-5. **Case-study validation of the framework through concrete field deployments** (RO2.2), demonstrating feasibility on a cost-controlled quadruped platform and surfacing gaps that motivate subsequent work.
+1. WANS (RO1)
+2. IMP (RO2)
+3. **A field-grounded experiential synthesis of long-duration wild deployment** (RO3.1) — a systems-level lessons-learned account with an associated open dataset, intended as a practical reference for subsequent work.
+4. (RO3.2)
 
 
 # 5. Research Plan
