@@ -16,8 +16,6 @@ This PhD investigates long-term autonomous navigation of legged robots in wild e
 
 ## Research Objectives
 
-The work is structured around three research objectives. 
-
 **RO1: Develop a Wild Autonomous Navigation System (WANS) for Long-Term Operation on Cost-Controlled Quadruped Platforms**
 
 - *RO1.1* Design and implement the system. 
@@ -31,13 +29,13 @@ The work is structured around three research objectives.
 - *RO2.3* Release IMP design and deployment protocols as open-source contributions
 
 **RO3: Contribute Community-Usable Knowledge, Artifacts, and Data from Wild Legged-Robot Deployment**
+
 - *RO3.1* Lessons-learned synthesis: integrate deployment experience with prior-work lessons into a structured reference (failure taxonomies, design decisions, operational protocols).
 - *RO3.2* Open-source artifacts: release IMP hardware design, portable WANS components, and deployment tooling.
 - *RO3.3* Deployment dataset (conditional on deployment scope and data quality): release a longitudinal UK woodland dataset covering sensor streams, robot telemetry, and monitoring payload readings, to support reproducible evaluation of wild navigation.
 
 # 2. Literature Review
 
-The proposal draws on three adjacent but only loosely linked bodies of work.
 
 ## 2.1 Quadruped robotics and autonomous navigation in unstructured wild environments
 
@@ -157,7 +155,6 @@ temperate woodland.
 deployment lessons from this work with prior-work lessons, producing a structured reference 
 for subsequent field research.
 
-
 **Open artifacts.** 
 - (1) Open-source IMP hardware design (CAD, BOM, firmware), portable WANS components, 
 and—subject to deployment scope and data quality—a longitudinal UK woodland 
@@ -165,26 +162,13 @@ deployment dataset.
 
 # 5. Research Plan
 
-*The schedule below is indicative. A detailed milestone-and-deliverable plan will be produced separately (Gantt chart) as the project begins.*
+| Year | WANS (RO1) | IMP (RO2) | Synthesis & Release (RO3) |
+|------|------------|-----------|----------------------------|
+| **Y1** | Platform setup; module integration; Level 1-2 deployments | — (scoping only) | Deployment logging protocol established |
+| **Y2** | Seasonal Level 2 campaigns; Level 3 pilot deployments | IMP v1 development and bench validation (H2) | Interim lessons captured |
+| **Y3** | System iteration from field lessons | IMP-WANS integration; paired deployments | Interim dataset curation; synthesis drafting |
+| **Y4** | Final deployment wave | IMP release (CAD, BOM, interfaces) | Lessons synthesis paper; dataset release; thesis |
 
-**Phase 1 — Baseline and stakeholder engagement.**
-Consolidate the ViPlanner-based baseline (§3.1). Begin structured outdoor deployments in low-complexity wild environments (grassland, hiking trails), with systematic failure logging. Initiate literature consolidation and stakeholder engagement for the monitoring framework (§3.3).
-
-**Phase 2 — Scenario diversification and framework maturation.**
-Expand deployments to higher-complexity terrain (light-to-dense forest, wetland) and longer missions (target: up to approximately ten-hour missions). Develop targeted robustness mechanisms as the baseline's cross-scenario transfer breaks down. Mature the monitoring framework from requirements notes into a structured design-space treatment; scope the primary monitoring case in detail with the ecology collaborator.
-
-**Phase 3 — Synthesis, integration, and first monitoring deployments.**
-Consolidate the experiential synthesis (RO1.3) into publishable form together with an associated open dataset and evaluation protocol. Integrate the navigation stack with the primary monitoring case payload and carry out the first field deployments of the combined system.
-
-**Phase 4 — Extended deployments and thesis.**
-Run the longest-duration integrated deployments; where timeline permits, extend to the stretch monitoring case (gas/soil sensor integration). Write and submit the thesis.
-
-| Year | RO1 focus                                                       | RO2 focus                                                |
-|------|-----------------------------------------------------------------|----------------------------------------------------------|
-| 1    | RO1.1 baseline consolidation; first low-complexity deployments  | RO2.1 initial literature and stakeholder engagement      |
-| 2    | RO1.2 complex terrain; ~10-hour missions; robustness mechanisms | RO2.1 framework maturation; RO2.2 primary case scoping   |
-| 3    | RO1.3 synthesis; dataset and evaluation protocol release        | RO2.2 primary case integration and first deployments     |
-| 4    | Final long-duration integrated deployments; thesis              | RO2.2 stretch case (if feasible); thesis write-up        |
 
 
 # References
